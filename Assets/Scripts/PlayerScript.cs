@@ -32,24 +32,54 @@ public class PlayerScript : MonoBehaviour
         GetCard();
 
     }
-    
+
     public int GetCard()
     {
         int cardValue = deckScript.DealCard(hand[cardIndex].GetComponent<CardScript>());
+        // Show card on game screen
         hand[cardIndex].GetComponent<Renderer>().enabled = true;
+        // Add card value to running total of the hand
         handValue += cardValue;
-
+        // If value is 1, it is an ace
         if (cardValue == 1)
         {
             aceList.Add(hand[cardIndex].GetComponent<CardScript>());
         }
+        //check if we should use an 11 instead of a 1
+        //AceCheck());
         cardIndex++;
         return handValue;
     }
 
-    // Update is called once per frame
-    void Update()
+    // Search for any ace conversion 
+    public void AceCheck()
+    {   
+        // for each ace in the list check
+        foreach(CardScript ace in aceList)
+        {
+            if(handValue + 10 < 22 && ace.GetValueOfcard() == 11)
+            {
+                // if converting, adjust card object value and hand
+                ace.SetValue(11);
+                handValue += 10;
+            }else if(handValue > 21 && ace.GetValueOfcard() == 11)
+            {
+                // if converting, adjust gameobj value and hand value
+                ace.SetValue(1);
+                handValue -= 10;
+            }
+        }
+    }
+
+    // Add or subtract from money, for bets
+    public void AdjustMoney(int amount)
     {
-        
+        money += amount;
+    }
+
+    //Output  players current money amount
+    public int GetMoney()
+    {
+        return money;
     }
 }
