@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
 
     public Button betBtn;
 
+    public PlayerScript playerScript;
+    public PlayerScript dealerScript;
+
     void Start()
     {
         dealBtn.onClick.AddListener(() => DealClicked());
@@ -23,8 +26,9 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     private void DealClicked()
     {
-        throw new NotImplementedException();
-
+        GameObject.Find("Deck").GetComponent<DeckScript>().Shuffle();
+        playerScript.StartHand();
+        dealerScript.StartHand();
     }
     private void HitClicked()
     {
