@@ -2288,12 +2288,12 @@ MonoBehaviour:
   betBtn: {fileID: 913192983}
   playerScript: {fileID: 2096962014}
   dealerScript: {fileID: 793705620}
-  scoreText: {fileID: 0}
-  dealerScoreText: {fileID: 0}
-  betsText: {fileID: 0}
-  cashText: {fileID: 0}
-  stayBtnText: {fileID: 0}
-  hideCard: {fileID: 0}
+  scoreText: {fileID: 162487074}
+  dealerScoreText: {fileID: 1534336222}
+  betsText: {fileID: 1624352099}
+  cashText: {fileID: 1401890538}
+  stayBtnText: {fileID: 720087822}
+  hideCard: {fileID: 503672037}
 --- !u!4 &791886149
 Transform:
   m_ObjectHideFlags: 0
