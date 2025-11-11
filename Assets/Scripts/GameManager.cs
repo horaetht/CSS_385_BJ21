@@ -272,5 +272,12 @@ public class GameManager : MonoBehaviour
             mainText.gameObject.SetActive(true);
 
         stayClicks = 0;
+
+        if(player21 && !dealer21 && playerScript.cardIndex == 2) {
+            mainText.text = "BlackJack!";
+            payout = Mathf.RoundToInt(pot * 2.5f);
+        }
     }
+
+    
 }
