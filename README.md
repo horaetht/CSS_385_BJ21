@@ -76,7 +76,7 @@ The game includes full betting, hit/stay mechanics, saving/loading player progre
 
 ---
 
-## 🧪 Objective 
+##  Objective 
 - Start from the **Main Menu**, play through multiple rounds, test betting logic.  
 - Confirm that “YOU LOSE” triggers correctly when money hits zero.  
 
