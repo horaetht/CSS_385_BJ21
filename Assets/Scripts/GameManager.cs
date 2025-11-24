@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class GameManager : MonoBehaviour
 {
@@ -27,6 +28,13 @@ public class GameManager : MonoBehaviour
 
     [Header("Dealer Hole Card")]
     public GameObject hideCard;
+
+
+    [Header("SFX")]
+    public AudioClip sfxClick;
+
+    [Header("Video")]
+    public WinVideoController winVideoController;
 
     int pot = 0;
     bool roundOver = false;
@@ -54,6 +62,8 @@ public class GameManager : MonoBehaviour
 
     public void BetClicked()
     {
+        AudioManager.Instance.PlaySFX(sfxClick);
+
         if (betBtn == null)
         {
             Debug.LogError("betBtn is not assigned on GameManager.");
@@ -96,7 +106,9 @@ public class GameManager : MonoBehaviour
     // Start round
 
     private void DealClicked()
-    {
+    {   
+        AudioManager.Instance.PlaySFX(sfxClick);
+
         if (pot <= 0)
         {
             mainText.text = "Place a bet first!";
@@ -150,7 +162,9 @@ public class GameManager : MonoBehaviour
     // Player actions
   
     private void HitClicked()
-    {
+    {   
+        AudioManager.Instance.PlaySFX(sfxClick);
+
         if (roundOver) return;
 
         if (playerScript.cardIndex < playerScript.hand.Length)
@@ -167,7 +181,9 @@ public class GameManager : MonoBehaviour
     }
 
     private void StayClicked()
-    {
+    {   
+        AudioManager.Instance.PlaySFX(sfxClick);
+
         if (roundOver) return;
 
         stayClicks++;
@@ -239,6 +255,10 @@ public class GameManager : MonoBehaviour
         {
             mainText.text = "Player wins!";
             payout = pot * 2;             // win 2x of the bet
+            AudioManager.Instance.PlayLongMusic();
+            if (winVideoController != null)
+                winVideoController.PlayWinVideo();
+            
         }
         else
         {
@@ -276,6 +296,9 @@ public class GameManager : MonoBehaviour
         if(player21 && !dealer21 && playerScript.cardIndex == 2) {
             mainText.text = "BlackJack!";
             payout = Mathf.RoundToInt(pot * 2.5f);
+            AudioManager.Instance.PlayLongMusic();
+            if (winVideoController != null)
+                winVideoController.PlayWinVideo();
         }
     }
 
